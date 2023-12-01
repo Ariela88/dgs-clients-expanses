@@ -1,6 +1,7 @@
 export interface Report {
     created: Date;
     type: string;
-    amount: number;
+    amount?: number;
     receipt: boolean;
+    
   }

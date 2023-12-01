@@ -11,6 +11,8 @@ import { DataService } from 'src/app/services/data.service';
 export class DetailsComponent implements OnInit {
   clientEmail?: string;
   client?: Client;
+  totalExpenses: number = 0;
+  expense?:Report[]=[]
 
   constructor(private route: ActivatedRoute, private dataService: DataService) {}
 
@@ -18,11 +20,11 @@ export class DetailsComponent implements OnInit {
     const emailParam = this.route.snapshot.paramMap.get('email');
     this.clientEmail = emailParam !== null ? emailParam : '';
 
-       this.dataService.getClientByEmail(this.clientEmail).subscribe(
+    this.dataService.getClientByEmail(this.clientEmail).subscribe(
       (client) => {
-        
-        if (client !== undefined) {
-          this.client = client!;
+        if (client) {
+          this.client = client;
+          this.calculateTotalExpenses(); 
           console.log('Dettagli del cliente:', this.client);
         } else {
           console.error('Cliente non trovato');
@@ -33,4 +35,16 @@ export class DetailsComponent implements OnInit {
       }
     );
   }
+  calculateTotalExpenses() {
+    if (this.client && this.client.expenses) {
+      this.totalExpenses = this.client.expenses.reduce((total, expense: Report) => total + expense.amount, 0);
+    } else {
+      this.totalExpenses = 0;
+    }
+  }
+  
+  
+  
+  
+  
 }

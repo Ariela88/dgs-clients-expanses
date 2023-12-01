@@ -8,19 +8,18 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit{
+export class MainComponent {
   client?: Client;
   inputEmail: string = '';
 
   constructor(private data: DataService, private router: Router) {}
 
-  ngOnInit(): void {
-        this.data.getClients().subscribe((data) => console.log(data));
-  }
+  
 
   redirectToDetails() {
     this.data.getClientByEmail(this.inputEmail).subscribe(
       (client) => {
+        console.log('Client retrieved:', client);
         if (client) {
           this.router.navigate(['/details', client.email]);
         } else {
@@ -32,5 +31,6 @@ export class MainComponent implements OnInit{
       }
     );
   }
-
+  
+  
 }
