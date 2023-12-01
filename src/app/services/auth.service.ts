@@ -8,6 +8,10 @@ import { DatasharingService } from './datasharing.service';
 })
 export class AuthService {
   private readonly clientKey = 'clients';
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+
+  constructor(private dataShar: DatasharingService) {}
 
   getClients() {
     const clientsJson = localStorage.getItem(this.clientKey);
@@ -18,12 +22,7 @@ export class AuthService {
     localStorage.setItem(this.clientKey, JSON.stringify(clients));
   }
 
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
-  constructor(private dataShar: DatasharingService) {}
-
-  private correctPassword = 'password123';
 
   authenticate(email: string, password: string): boolean {
     const clients = this.getClients();
