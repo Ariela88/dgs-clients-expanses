@@ -1,49 +1,42 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map, of, switchMap, take } from 'rxjs';
 import { Client } from '../model/client';
-import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  client?: Client;
   
-  clients: Client[] = [
-    {
-      id: 0,
-      name: 'Luca Rossi',
-      email: 'lucarossi@gmail.com',
-      expenses: []
-    },
-    {
-      id: 1,
-      name: 'Marco Verdi',
-      email: 'marcoverdi@gmail.com',
-      expenses: []
-    },
-    {
-      id: 2,
-      name: 'Sara Neri',
-      email: 'saraneri@gmail.com',
-      expenses: []
-    },
-  ];
+  private clientsUrl = 'assets/expanses.json'; 
 
-  
-  getClient(clientId: number): Observable<Client> {
-    const client = this.clients.find(c => c.id === clientId);
+  constructor(private http: HttpClient) {}
 
-     if (client) {
-      return of(client);
-    } else {
-      
-      return of();
-    }
+  getClients(): Observable<Client[]> {
+    return this.http.get<Client[]>(this.clientsUrl);
   }
 
-  getClients():Observable<Client[]>{
+  getClientByEmail(email: string): Observable<Client | null> {
+    return this.getClients().pipe(
+      map(clients => clients.find(client => client.email === email) || null)
+    );
+  }
+  
 
-    return of(this.clients)
+  addClient(newClient: Client): Observable<undefined> {
+    return this.getClients().pipe(
+      take(1),
+      switchMap(clients => {
+        const existingClient = clients.find(client => client.email === newClient.email);
+
+        if (!existingClient) {
+          clients.push(newClient);
+          localStorage.setItem('clients', JSON.stringify(clients));
+        }
+
+        return of(undefined);
+      })
+    );
   }
 }

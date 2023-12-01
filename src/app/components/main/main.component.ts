@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Client } from 'src/app/model/client';
 import { DataService } from 'src/app/services/data.service';
 
@@ -8,19 +9,28 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit{
-  client?:Client
-  
-  constructor(private data:DataService){}
-  
-    
-    ngOnInit(): void {
-      console.log('main component')
-      this.data.getClient(0).subscribe(data=> {
-        console.log(data,'main component')
-      })
+  client?: Client;
+  inputEmail: string = '';
 
-      this.data.getClients().subscribe(data=> console.log(data))
-      
-    }
+  constructor(private data: DataService, private router: Router) {}
+
+  ngOnInit(): void {
+        this.data.getClients().subscribe((data) => console.log(data));
+  }
+
+  redirectToDetails() {
+    this.data.getClientByEmail(this.inputEmail).subscribe(
+      (client) => {
+        if (client) {
+          this.router.navigate(['/details', client.email]);
+        } else {
+          console.log('Cliente non trovato');
+        }
+      },
+      (error) => {
+        console.error('Errore nel recupero del cliente:', error);
+      }
+    );
+  }
 
 }

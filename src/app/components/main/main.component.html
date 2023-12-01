@@ -1,1 +1,9 @@
-<p>main works!</p>
+
+<form (ngSubmit)="redirectToDetails()" #emailForm="ngForm">
+    <label for="email">Inserisci l'email:</label>
+    <input type="text" id="email" name="email" [(ngModel)]="inputEmail" required>
+    <button type="submit">Vai ai dettagli</button>
+  </form>
+  
+
+  

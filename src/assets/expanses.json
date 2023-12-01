@@ -1,0 +1,27 @@
+{
+    "clients": [
+      {
+        "name": "Luca Rossi",
+        "email": "lucarossi@gmail.com",
+        "expenses": [
+          { "created": "2023-01-01", "type": "Food", "amount": 50, "receipt": true },
+          { "created": "2023-01-15", "type": "Transportation", "amount": 30, "receipt": false },
+          { "created": "2023-02-05", "type": "Entertainment", "amount": 20, "receipt": true }
+        ]
+      },
+      {
+        "name": "Marco Verdi",
+        "email": "marcoverdi@gmail.com",
+        "expenses": []
+      },
+      {
+        "name": "Sara Neri",
+        "email": "saraneri@gmail.com",
+        "expenses": [
+          { "created": "2023-03-10", "type": "Utilities", "amount": 80, "receipt": true },
+          { "created": "2023-03-22", "type": "Shopping", "amount": 100, "receipt": true }
+        ]
+      }
+    ]
+  }
+  

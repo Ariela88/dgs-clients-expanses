@@ -1,1 +1,37 @@
-<p>details works!</p>
+<div class="details-container" *ngIf="client"> 
+    <mat-card>
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput placeholder="Email" [value]="client.email" disabled>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput placeholder="Name" [value]="client.name" disabled>
+        </mat-form-field>
+  
+        <mat-table [dataSource]="client.expenses">
+        
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let expense"> {{ expense.name }} </mat-cell>
+          </ng-container>
+  
+        
+          <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+            <mat-cell *matCellDef="let expense"> {{ expense.amount }} </mat-cell>
+          </ng-container>
+  
+      
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+            <mat-cell *matCellDef="let expense"> {{ expense.date | date:'short' }} </mat-cell>
+          </ng-container>
+  
+          <mat-header-row *matHeaderRowDef="['name', 'amount', 'date']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['name', 'amount', 'date']"></mat-row>
+        </mat-table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
