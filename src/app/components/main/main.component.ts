@@ -15,7 +15,7 @@ export class MainComponent implements OnInit {
   constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit(): void {
-    this.dataService.getClients().subscribe((clients) => {
+    this.dataService.getClients().subscribe((clients:any) => {
       this.clients = clients;
     });
   }

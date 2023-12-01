@@ -1,7 +1,8 @@
 <!-- main.component.html -->
 
-<div *ngFor="let client of clients">
-  <p>
+<ul>
+  <li *ngFor="let client of clients">
+    
     <a [routerLink]="['/client', client.email]">{{ client.name }}</a>
-  </p>
-</div>
+  </li>
+</ul>

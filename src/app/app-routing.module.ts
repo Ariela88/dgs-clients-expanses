@@ -5,14 +5,19 @@ import { LoginComponent } from './components/login/login.component';
 import { InsertComponent } from './components/insert/insert.component';
 import { DetailsComponent } from './components/details/details.component';
 import { ClientComponent } from './components/client/client.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {path: 'home',component:MainComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {path: 'login',component:LoginComponent},
   {path: 'insert',component:InsertComponent},
-  { path: 'client/:email', component: ClientComponent },
-  { path: 'details/:email', component: DetailsComponent },
+  {
+    path: 'client/:email',
+    component: ClientComponent,
+    canActivate: [AuthGuard], 
+  },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

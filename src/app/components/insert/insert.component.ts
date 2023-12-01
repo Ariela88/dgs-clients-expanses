@@ -25,7 +25,7 @@ export class InsertComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.dataService.getClients().subscribe((clients) => {
+    this.dataService.getClients().subscribe((clients:any) => {
       this.clients = clients;
     });
 
