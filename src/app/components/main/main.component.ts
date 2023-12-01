@@ -8,29 +8,20 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent {
-  client?: Client;
-  inputEmail: string = '';
+export class MainComponent implements OnInit {
 
-  constructor(private data: DataService, private router: Router) {}
+  clients: Client[] = [];
 
-  
+  constructor(private dataService: DataService, private router: Router) {}
 
-  redirectToDetails() {
-    this.data.getClientByEmail(this.inputEmail).subscribe(
-      (client) => {
-        console.log('Client retrieved:', client);
-        if (client) {
-          this.router.navigate(['/details', client.email]);
-        } else {
-          console.log('Cliente non trovato');
-        }
-      },
-      (error) => {
-        console.error('Errore nel recupero del cliente:', error);
-      }
-    );
+  ngOnInit(): void {
+    this.dataService.getClients().subscribe((clients) => {
+      this.clients = clients;
+    });
   }
-  
+
+  navigateToClient(email: string) {
+    this.router.navigate(['/client', email]);
+  }
   
 }

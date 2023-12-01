@@ -12,7 +12,10 @@
       {
         "name": "Marco Verdi",
         "email": "marcoverdi@gmail.com",
-        "expenses": []
+        "expenses": [
+          { "created": "2023-03-10", "type": "Utilities", "amount": 80, "receipt": true },
+          { "created": "2023-03-22", "type": "Shopping", "amount": 100, "receipt": true }
+        ]
       },
       {
         "name": "Sara Neri",

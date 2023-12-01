@@ -12,6 +12,9 @@ import { DetailsComponent } from './components/details/details.component';
 import { MaterialModule } from './material/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
+import { ClientComponent } from './components/client/client.component';
+
 
 
 @NgModule({
@@ -20,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     MainComponent,
     LoginComponent,
     InsertComponent,
-    DetailsComponent
+    DetailsComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,
@@ -29,10 +33,12 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    
+    
     
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

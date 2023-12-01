@@ -1,9 +1,7 @@
+<!-- main.component.html -->
 
-<form (ngSubmit)="redirectToDetails()" #emailForm="ngForm">
-    <label for="email">Inserisci l'email:</label>
-    <input type="text" id="email" name="email" [(ngModel)]="inputEmail" required>
-    <button type="submit">Vai ai dettagli</button>
-  </form>
-  
-
-  
+<div *ngFor="let client of clients">
+  <p>
+    <a [routerLink]="['/client', client.email]">{{ client.name }}</a>
+  </p>
+</div>

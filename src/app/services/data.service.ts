@@ -1,50 +1,97 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 import { Client } from '../model/client';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { DatasharingService } from './datasharing.service';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
   private clientsUrl = 'assets/expanses.json';
-
-  constructor(private http: HttpClient) {}
-
-  private getClientsFromStorage(): Client[] {
-    const clientsJson = localStorage.getItem('clients');
-    return clientsJson ? JSON.parse(clientsJson) : [];
+  private clientsSubject = new BehaviorSubject<Client[]>([]);
+ 
+  constructor(private http: HttpClient,private auth:AuthService, private dataShar:DatasharingService) {
+    this.saveInitialData();
+    
+  
   }
 
-  getClients(): Observable<Client[]> {
-    return this.http.get(this.clientsUrl).pipe(
-      catchError((error) => {
-        console.error('Error loading clients from server:', error);
-        return of(this.getClientsFromStorage()); 
-      }),
-      map((data: any) => (data.clients ? data.clients : [])) 
-    );
+  getClients() {
+    return of(this.auth.getClients());
   }
 
-  getClientByEmail(email: string): Observable<Client | null> {
-    return this.getClients().pipe(
-      map((clients) => clients.find((client) => client.email === email) || null)
-    );
+  addClient(client: Client) {
+    const clients = this.auth.getClients();
+    clients.push(client);
+    this.auth.setClients(clients);
+    this.clientsSubject.next(clients);
+
+   
+    this.dataShar.notifyExpenseAdded(client);
+
+    return of(client);
+  }
+  
+  saveInitialData() {
+    const initialData = {
+      clients: [
+        {
+          name: 'Luca Rossi',
+          email: 'lucarossi@gmail.com',
+          expenses: [
+            { created: '2023-01-01', type: 'Food', amount: 50, receipt: true },
+            { created: '2023-01-15', type: 'Transportation', amount: 30, receipt: false },
+            { created: '2023-02-05', type: 'Entertainment', amount: 20, receipt: true },
+          ],
+        },
+        {
+          name: 'Mario Verdi',
+          email: 'marioverdi@gmail.com',
+          expenses: [
+            { created: '2023-01-01', type: 'Food', amount: 50, receipt: true },
+            { created: '2023-01-15', type: 'Transportation', amount: 30, receipt: false },
+            { created: '2023-02-05', type: 'Entertainment', amount: 20, receipt: true },
+          ],
+        },
+        {
+          name: 'Sara Neri',
+          email: 'saraneri@gmail.com.com',
+          expenses: [
+            { created: '2023-01-01', type: 'Food', amount: 50, receipt: true },
+            { created: '2023-01-15', type: 'Transportation', amount: 30, receipt: false },
+            { created: '2023-02-05', type: 'Entertainment', amount: 20, receipt: true },
+          ],
+        },
+       
+      ],
+    };
+
+    this.auth.setClients(initialData.clients);
   }
 
-  addClient(newClient: Client): Observable<undefined> {
-    return this.getClients().pipe(
-      switchMap((clients) => {
-        const existingClient = clients.find((client) => client.email === newClient.email);
+  getClientByEmail(email: string): Observable<Client | undefined> {
+    const clients = this.auth.getClients();
+    return of(clients.find((client:Client) => client.email === email));
+  }
 
-        if (!existingClient) {
-          clients.push(newClient);
-          localStorage.setItem('clients', JSON.stringify({ clients }));
-        }
+  setClient(){
+    const clients = this.auth.getClients();
+    this.auth.setClients(clients)
+  }
 
-        return of(undefined);
-      })
-    );
+  updateClient(updatedClient: Client) {
+    const clients = this.auth.getClients();
+    const index = clients.findIndex((c: Client) => c.email === updatedClient.email);
+
+    if (index !== -1) {
+      clients[index] = updatedClient;
+      this.auth.setClients(clients);
+      this.clientsSubject.next(clients);
+    } else {
+      console.error('Cliente non trovato per l\'aggiornamento.');
+    }
   }
 }

@@ -1,56 +1,69 @@
 // insert.component.ts
-import { ChangeDetectorRef, Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/model/client';
 import { DataService } from 'src/app/services/data.service';
+import { DatasharingService } from 'src/app/services/datasharing.service';
 
 @Component({
   selector: 'app-insert',
   templateUrl: './insert.component.html',
   styleUrls: ['./insert.component.scss']
 })
-export class InsertComponent {
+export class InsertComponent implements OnInit {
+  expenseForm!: FormGroup;
+  clients?: Client[] = [];
+  clientEmail?: string;
 
-  clientForm: FormGroup;
-  newClient: Client = {
-    name: '',
-    email: '',
-    expenses: [],
-  };
+  constructor(
+    private formBuilder: FormBuilder,
+    private dataService: DataService,
+    private datasharingService: DatasharingService,
+    private route: ActivatedRoute
+  ) {}
 
-  clients: Client[] = []
-
-  constructor(private formBuilder: FormBuilder, private dataService: DataService, private cdRef: ChangeDetectorRef,private route: Router ) {
-    this.clientForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+  ngOnInit() {
+    this.dataService.getClients().subscribe((clients) => {
+      this.clients = clients;
     });
 
-    this.dataService.getClients().subscribe(data=> {
-      console.log(data)
-    })
+    this.route.params.subscribe((params) => {
+      this.clientEmail = params['email'];
+    });
+
+    this.expenseForm = this.formBuilder.group({
+      clientEmail: [this.clientEmail, Validators.required], 
+      created: ['', Validators.required],
+      type: ['', Validators.required],
+      amount: ['', [Validators.required, Validators.min(0)]],
+      receipt: [false, Validators.required],
+    });
   }
 
   onSubmit() {
-    console.log('cliccato');
-    if (this.clientForm?.valid) {
-      const formValue = this.clientForm.value as Client;
-      this.dataService.addClient(formValue).subscribe(
-        () => {
-          console.log('Nuovo cliente aggiunto con successo.');
-          this.clientForm?.reset(); 
-          this.cdRef.detectChanges();
-        },
-        (error) => {
-          console.error('Errore durante l\'aggiunta del cliente:', error);
-        },
-        () => {
-          console.log('Observable completato.');
-        }
-      );
+    if (this.expenseForm?.valid) {
+      const newExpense = this.expenseForm.value;
+      const clientIndex = this.clients?.findIndex((c) => c.email === newExpense.clientEmail);
+  
+      if (clientIndex !== -1) {
+        
+        const updatedClient = { ...this.clients![clientIndex!]};
+
+        updatedClient.expenses.push({
+          created: newExpense.created,
+          type: newExpense.type,
+          amount: newExpense.amount,
+          receipt: newExpense.receipt,
+        });
+
+       
+        this.dataService.updateClient(updatedClient);
+
+        
+        this.datasharingService.notifyExpenseAdded(updatedClient);
+      }
     }
-    console.log(this.clientForm.value);
-    this.route.navigate(['/details', this.clientForm.get('email')?.value]);
   }
 }

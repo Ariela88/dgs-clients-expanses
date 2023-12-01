@@ -5,5 +5,16 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  constructor() { }
+  private readonly clientKey = 'clients';
+
+  getClients() {
+    const clientsJson = localStorage.getItem(this.clientKey);
+    return clientsJson ? JSON.parse(clientsJson) : [];
+  }
+
+  setClients(clients: any[]) {
+    localStorage.setItem(this.clientKey, JSON.stringify(clients));
+  }
+
+  
 }

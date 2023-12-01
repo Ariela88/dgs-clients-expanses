@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Client } from 'src/app/model/client';
 import { DataService } from 'src/app/services/data.service';
-import { Client, Report } from 'src/app/model/client';
 import { DatasharingService } from 'src/app/services/datasharing.service';
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss'],
+  selector: 'app-client',
+  templateUrl: './client.component.html',
+  styleUrls: ['./client.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class ClientComponent implements OnInit {
   clientEmail?: string;
   client?: Client;
-  totalExpenses: number = 0;
 
   constructor(private route: ActivatedRoute, private dataService: DataService, private dataSharingService: DatasharingService) {}
 
@@ -22,8 +21,12 @@ export class DetailsComponent implements OnInit {
       this.loadClientDetails();
     });
 
-    this.dataSharingService.expenseAdded$.subscribe(() => {
-      this.loadClientDetails();
+    
+    this.dataSharingService.expenseAdded$.subscribe((client) => {
+      if (client && this.client && this.client.email === client.email) {
+        this.client = client;
+        console.log('Dettagli del cliente aggiornati:', this.client);
+      }
     });
   }
 
@@ -33,7 +36,6 @@ export class DetailsComponent implements OnInit {
         (client) => {
           if (client) {
             this.client = client;
-            this.calculateTotalExpenses();
             console.log('Dettagli del cliente:', this.client);
           } else {
             console.error('Cliente non trovato');
@@ -43,14 +45,6 @@ export class DetailsComponent implements OnInit {
           console.error('Errore nel recupero del cliente:', error);
         }
       );
-    }
-  }
-
-  calculateTotalExpenses() {
-    if (this.client && this.client.expenses) {
-      this.totalExpenses = this.client.expenses.reduce((total, expense) => total + expense.amount!, 0);
-    } else {
-      this.totalExpenses = 0;
     }
   }
 }
