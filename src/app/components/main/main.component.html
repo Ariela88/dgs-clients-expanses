@@ -1,15 +1,28 @@
-<a routerLink="/home" (click)="clearSearchResults()">Home</a>
+<div class="main-container">
 
-<div>
-  <input type="text" [(ngModel)]="searchQuery" placeholder="Cerca cliente">
-  <button (click)="searchClients()">Cerca</button>
-</div>
 
-<div *ngIf="searchResults.length > 0">
-  <h3>Risultati della ricerca:</h3>
-  <ul>
-    <li *ngFor="let client of searchResults">
-      <a (click)="navigateToClient(client.email)" class="">{{ client.name }}</a>
-    </li>
-  </ul>
+  <div class="h2-text">
+    <h2> Cerca cliente per nome: </h2>
+
+  </div>
+  
+  <hr>
+  <div class="input-search-container">
+    <input class="input-search" type="text" [(ngModel)]="searchQuery" placeholder="Inserisci il nome">
+<div class="button-container">
+    <button mat-raised-button color="primary" (click)="searchClients()">Cerca</button>
+    <button mat-raised-button color="warn" (click)="clearSearchResults()">Reset Risultati</button>
+  </div>
+  </div>
+  <div *ngIf="searchResults.length > 0">
+    <h3>Risultati della ricerca:</h3>
+    <ul>
+      <li *ngFor="let client of searchResults">
+        <mat-card (click)="navigateToClient(client.email)">
+          <mat-card-content>{{ client.name }}</mat-card-content>
+        </mat-card>
+
+      </li>
+    </ul>
+  </div>
 </div>

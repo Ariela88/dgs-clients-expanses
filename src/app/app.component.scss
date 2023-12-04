@@ -1,0 +1,21 @@
+
+.logo{
+    font-size: 88px;
+    font-family: 'Anton', sans-serif;
+    color:#3f51b5;
+    text-shadow: -2px 0 #ffffff, 0 2px #ffffff, 2px 0 #ffffff, 0 -2px #ffffff;
+    
+}
+
+.title{
+    width: 100%;
+    margin-left: 20px;
+    font-size: 44px;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+
+}
+
+.toolbar{
+    display: flex;
+    align-items: flex-end;
+}

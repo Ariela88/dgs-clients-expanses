@@ -10,6 +10,7 @@ import { Client, Report } from 'src/app/model/client';
 export class ExpenseChartComponent implements OnInit,OnChanges {
   @Input() client?: Client;
   @Input() updateChartTrigger: boolean = false;
+  @Input() report?:Report
 
  ngOnInit(): void {
   this.generateChart();
@@ -44,7 +45,7 @@ generateChart(){
         labels: labels,
         datasets: [
           {
-            label: `${this.client?.name} - Spese Giornaliere`,
+            label: `${this.client.name} ` ,
             data: values,
             borderWidth: 1,
           },

@@ -1,4 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
-
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Yanone+Kaffeesatz:wght@200;400;600&display=swap');
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+
+        // background-image: url(./assets/bg-blue.jpg);
+        // background-attachment: fixed;
+        // background-size: cover;
+        background-color: rgb(87, 175, 230);
+      }
+mat-toolbar{
+    height: 80px !important;
+}

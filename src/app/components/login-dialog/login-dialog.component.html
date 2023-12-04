@@ -1,14 +1,17 @@
 
-<h2>Login</h2>
-<div>
+<div class="dialog"> 
+<h2 mat-dialog-title>Login</h2>
+<div mat-dialog-content class="input-login email">
   <label>Email:</label>
   <input type="text" [(ngModel)]="email" />
 </div>
-<div>
+<div mat-dialog-content class="input-login password">
   <label>Password:</label>
   <input type="password" [(ngModel)]="password" />
 </div>
-<div>
-  <button (click)="login()">Login</button>
-  <button (click)="closeDialog()">Cancel</button>
+<div mat-dialog-actions class="button-login-container">
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="login()">Login</button>
+  <button  mat-button mat-dialog-close (click)="closeDialog()">Cancel</button>
+</div>
+
 </div>
