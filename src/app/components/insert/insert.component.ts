@@ -65,5 +65,6 @@ export class InsertComponent implements OnInit {
     }
 
     this.expenseForm.reset()
+    
   }
 }

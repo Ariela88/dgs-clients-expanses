@@ -4,7 +4,7 @@
   </div>
   
   <div class="show-insert">
-    <button mat-raised-button color="primary" (click)="insertExpenses()">Inserisci Spesa</button>
+    <button mat-raised-button color="primary" (click)="insertExpenses()">{{!showInsert? 'Insert new expense' : 'Hide'}}</button>
     
   </div>
   <app-insert *ngIf="showInsert"></app-insert>
