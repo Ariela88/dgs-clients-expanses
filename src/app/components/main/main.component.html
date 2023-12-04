@@ -1,18 +1,18 @@
 <div class="main-container">
-
-
-  <div class="h2-text">
-    <h2> Cerca cliente per nome: </h2>
-
-  </div>
-  
-  <hr>
-  <div class="input-search-container">
-    <input class="input-search" type="text" [(ngModel)]="searchQuery" placeholder="Inserisci il nome">
-<div class="button-container">
-    <button mat-raised-button color="primary" (click)="searchClients()">Cerca</button>
-    <button mat-raised-button color="warn" (click)="clearSearchResults()">Reset Risultati</button>
-  </div>
+  <div class="form-search">
+    <div class="h2-text">
+      <h2> Ricerca Cliente: </h2>
+    </div>
+    <div class="input-search-container">
+      <input class="input-search" type="text" [(ngModel)]="searchQuery" placeholder="Inserisci il nome">
+      <small *ngIf="noResultsFound">
+        Nessun risultato trovato per la tua ricerca.
+      </small>
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="searchClients()">Cerca</button>
+        <button mat-raised-button (click)="clearSearchResults()">Reset Risultati</button>
+      </div>
+    </div>
   </div>
   <div *ngIf="searchResults.length > 0">
     <h3>Risultati della ricerca:</h3>

@@ -41,7 +41,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 @NgModule({
@@ -83,6 +85,7 @@ import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    MatNativeDateModule
     
     
     
@@ -123,6 +126,7 @@ import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    MatNativeDateModule
     
   ]
 })

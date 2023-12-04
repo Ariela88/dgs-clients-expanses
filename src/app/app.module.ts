@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import{FormsModule} from '@angular/forms'
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './components/main/main.component';
-import { LoginComponent } from './components/login/login.component';
 import { InsertComponent } from './components/insert/insert.component';
 import { DetailsComponent } from './components/details/details.component';
 import { MaterialModule } from './material/material/material.module';
@@ -16,21 +15,19 @@ import { AuthService } from './services/auth.service';
 import { ClientComponent } from './components/client/client.component';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { ExpenseChartComponent } from './components/expense-chart/expense-chart.component';
-import { NgChartsModule } from 'ng2-charts'; 
-
-
-
+import { NgChartsModule } from 'ng2-charts';
+import { WatchComponent } from './components/watch/watch.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    LoginComponent,
     InsertComponent,
     DetailsComponent,
     ClientComponent,
     LoginDialogComponent,
-    ExpenseChartComponent
+    ExpenseChartComponent,
+    WatchComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,12 +37,9 @@ import { NgChartsModule } from 'ng2-charts';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgChartsModule
-    
-    
-    
+    NgChartsModule,
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

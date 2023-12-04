@@ -1,36 +1,40 @@
-
+<div class="show-graphic-button"> <button mat-raised-button color="primary" (click)="showGraphic()">{{ !graphicVisible ? 'Mostra Andamento Mensile' : 'Nascondi Grafico'}}</button></div>
 
 <div *ngIf="client" class="details-container">
+  
   <div class="table-details"> 
-  <table>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Amount</th>
-        <th>Date</th>
-        <th>Receipt</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let expense of client.expenses">
-        <td>{{ expense.type }}</td>
-        <td>{{ expense.amount }}</td>
-        <td>{{ expense.created | date:'short' }}</td>
-        <td>{{ expense.receipt ? 'Yes' : 'No' }}</td>
-      </tr>
-    </tbody>
-   
-    <tfoot>
-      <tr>
-        <td colspan="3">Total Expenses:</td>
-        <td>{{ totalExpenses | currency:'EUR':'symbol':'1.2-2' }}</td>
-      </tr>
-    </tfoot>
-  </table>
-</div>
-<div class="graphic-details"> 
-  <button (click)="showGraphic()">Mostra andamento Mensile</button>
-  <app-expense-chart [client]="client" *ngIf="graphicVisible" [updateChartTrigger]="graphicVisible"></app-expense-chart>
-</div>
-</div>
+    <table mat-table [dataSource]="client.expenses" class="mat-elevation-z8">
+     
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let expense">{{ expense.type }}</td>
+      </ng-container>
 
+     
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef>Amount</th>
+        <td mat-cell *matCellDef="let expense">{{ expense.amount }}</td>
+      </ng-container>
+
+     
+      <ng-container matColumnDef="created">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let expense">{{ expense.created | date:'short' }}</td>
+      </ng-container>
+
+      
+      <ng-container matColumnDef="receipt">
+        <th mat-header-cell *matHeaderCellDef>Receipt</th>
+        <td mat-cell *matCellDef="let expense">{{ expense.receipt ? 'Yes' : 'No' }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div class="graphic-details"> 
+   
+    <app-expense-chart [client]="client" *ngIf="graphicVisible" [updateChartTrigger]="graphicVisible"></app-expense-chart>
+  </div>
+</div>

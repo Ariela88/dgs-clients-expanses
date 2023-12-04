@@ -7,14 +7,18 @@ import { DatasharingService } from 'src/app/services/datasharing.service';
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
-  styleUrls: ['./client.component.scss']
+  styleUrls: ['./client.component.scss'],
 })
 export class ClientComponent implements OnInit {
   clientEmail?: string;
   client?: Client;
-  showInsert = false
+  showInsert = false;
 
-  constructor(private route: ActivatedRoute, private dataService: DataService, private dataSharingService: DatasharingService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: DataService,
+    private dataSharingService: DatasharingService
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -22,7 +26,6 @@ export class ClientComponent implements OnInit {
       this.loadClientDetails();
     });
 
-    
     this.dataSharingService.expenseAdded$.subscribe((client) => {
       if (client && this.client && this.client.email === client.email) {
         this.client = client;
@@ -49,8 +52,7 @@ export class ClientComponent implements OnInit {
     }
   }
 
-  insertExpenses(){
-    this.showInsert = !this.showInsert
-
+  insertExpenses() {
+    this.showInsert = !this.showInsert;
   }
 }

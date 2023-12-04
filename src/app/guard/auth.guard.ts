@@ -1,4 +1,3 @@
-// auth.guard.ts
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -23,7 +22,8 @@ export class AuthGuard implements CanActivate {
 
   private async showLoginDialog(): Promise<boolean> {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
-      width: '300px',
+      width: '400px',
+     
       disableClose: true, 
     });
 

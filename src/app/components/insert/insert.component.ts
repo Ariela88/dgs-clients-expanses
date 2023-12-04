@@ -1,8 +1,6 @@
-// insert.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Client } from 'src/app/model/client';
 import { DataService } from 'src/app/services/data.service';
 import { DatasharingService } from 'src/app/services/datasharing.service';
@@ -65,5 +63,7 @@ export class InsertComponent implements OnInit {
         this.datasharingService.notifyExpenseAdded(updatedClient);
       }
     }
+
+    this.expenseForm.reset()
   }
 }

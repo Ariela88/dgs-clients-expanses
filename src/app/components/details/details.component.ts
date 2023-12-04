@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
-import { Client, Report } from 'src/app/model/client';
+import { Client } from 'src/app/model/client';
 import { DatasharingService } from 'src/app/services/datasharing.service';
 
 @Component({
@@ -13,7 +13,8 @@ export class DetailsComponent implements OnInit {
   clientEmail?: string;
   client?: Client;
   totalExpenses: number = 0;
-  graphicVisible = false
+  graphicVisible = false;
+  displayedColumns: string[] = ['type', 'amount', 'created', 'receipt'];
 
   constructor(private route: ActivatedRoute, private dataService: DataService, private dataSharingService: DatasharingService) {}
 

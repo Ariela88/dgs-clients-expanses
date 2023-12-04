@@ -14,6 +14,7 @@ export class MainComponent implements OnInit {
   clients: Client[] = [];
   searchQuery: string = '';
   searchResults: Client[] = [];
+  noResultsFound: boolean = false;
 
   constructor(private dataService: DataService, private router: Router) {}
 
@@ -35,9 +36,11 @@ export class MainComponent implements OnInit {
     } else {
       this.searchResults = [];
     }
+    this.noResultsFound = this.searchResults.length === 0;
   }
 
   clearSearchResults() {
     this.searchResults = [];
+    this.noResultsFound = false;
   }
 }
