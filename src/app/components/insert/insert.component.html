@@ -1,9 +1,5 @@
 <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" class="form-container">
-  <div class="input-container">
-    <input type="hidden" formControlName="clientEmail" [value]="clientEmail" />
-  </div>
-
-  <div class="input-container">
+    <div class="input-container">
     <mat-form-field appearance="fill">
       <mat-label>Date</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="created" />

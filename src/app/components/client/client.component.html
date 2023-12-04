@@ -1,10 +1,11 @@
 <div class="client-container">
-    <h1> Hello {{client?.name}}!</h1>
-    <app-details></app-details>
-  </div>
-  
-  <div class="show-insert">
-    <button mat-raised-button color="primary" (click)="insertExpenses()">{{!showInsert? 'Insert new expense' : 'Hide'}}</button>
-    
-  </div>
-  <app-insert *ngIf="showInsert"></app-insert>
+  <h1> Hello {{client?.name}}!</h1>
+  <app-details></app-details>
+</div>
+
+<div class="show-insert">
+  <button mat-raised-button color="primary" (click)="insertExpenses()">{{!showInsert? 'Insert new expense' :
+    'Hide'}}</button>
+
+</div>
+<app-insert *ngIf="showInsert"></app-insert>
