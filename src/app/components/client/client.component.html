@@ -4,7 +4,7 @@
   </div>
   
   <div>
-    <h1>Aggiungi Spese</h1>
-    <app-insert></app-insert>
+    <button (click)="insertExpenses()">Inserisci Spesa</button>
+    <app-insert *ngIf="showInsert"></app-insert>
   </div>
   

@@ -1,8 +1,15 @@
-<!-- main.component.html -->
+<a routerLink="/home" (click)="clearSearchResults()">Home</a>
 
-<ul>
-  <li *ngFor="let client of clients">
-    
-    <a [routerLink]="['/client', client.email]">{{ client.name }}</a>
-  </li>
-</ul>
+<div>
+  <input type="text" [(ngModel)]="searchQuery" placeholder="Cerca cliente">
+  <button (click)="searchClients()">Cerca</button>
+</div>
+
+<div *ngIf="searchResults.length > 0">
+  <h3>Risultati della ricerca:</h3>
+  <ul>
+    <li *ngFor="let client of searchResults">
+      <a (click)="navigateToClient(client.email)" class="">{{ client.name }}</a>
+    </li>
+  </ul>
+</div>

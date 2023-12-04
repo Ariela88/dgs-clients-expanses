@@ -12,6 +12,7 @@ import { DatasharingService } from 'src/app/services/datasharing.service';
 export class ClientComponent implements OnInit {
   clientEmail?: string;
   client?: Client;
+  showInsert = false
 
   constructor(private route: ActivatedRoute, private dataService: DataService, private dataSharingService: DatasharingService) {}
 
@@ -46,5 +47,10 @@ export class ClientComponent implements OnInit {
         }
       );
     }
+  }
+
+  insertExpenses(){
+    this.showInsert = !this.showInsert
+
   }
 }

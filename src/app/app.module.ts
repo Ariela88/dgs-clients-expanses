@@ -14,6 +14,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { ClientComponent } from './components/client/client.component';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { ExpenseChartComponent } from './components/expense-chart/expense-chart.component';
+import { NgChartsModule } from 'ng2-charts'; 
+
 
 
 
@@ -24,7 +28,9 @@ import { ClientComponent } from './components/client/client.component';
     LoginComponent,
     InsertComponent,
     DetailsComponent,
-    ClientComponent
+    ClientComponent,
+    LoginDialogComponent,
+    ExpenseChartComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +40,7 @@ import { ClientComponent } from './components/client/client.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgChartsModule
     
     
     

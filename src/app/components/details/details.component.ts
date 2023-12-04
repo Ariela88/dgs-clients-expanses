@@ -13,6 +13,7 @@ export class DetailsComponent implements OnInit {
   clientEmail?: string;
   client?: Client;
   totalExpenses: number = 0;
+  graphicVisible = false
 
   constructor(private route: ActivatedRoute, private dataService: DataService, private dataSharingService: DatasharingService) {}
 
@@ -52,5 +53,10 @@ export class DetailsComponent implements OnInit {
     } else {
       this.totalExpenses = 0;
     }
+  }
+
+  showGraphic(){
+this.graphicVisible = !this.graphicVisible
+this.dataSharingService.triggerExpenseChartUpdate();
   }
 }

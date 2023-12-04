@@ -1,6 +1,7 @@
 
 
-<div *ngIf="client">
+<div *ngIf="client" class="details-container">
+  <div class="table-details"> 
   <table>
     <thead>
       <tr>
@@ -27,3 +28,9 @@
     </tfoot>
   </table>
 </div>
+<div class="graphic-details"> 
+  <button (click)="showGraphic()">Mostra andamento Mensile</button>
+  <app-expense-chart [client]="client" *ngIf="graphicVisible" [updateChartTrigger]="graphicVisible"></app-expense-chart>
+</div>
+</div>
+
