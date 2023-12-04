@@ -42,5 +42,8 @@ export class MainComponent implements OnInit {
   clearSearchResults() {
     this.searchResults = [];
     this.noResultsFound = false;
+    this.searchQuery = ''
   }
+
+  
 }

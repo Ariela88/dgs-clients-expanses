@@ -32,6 +32,7 @@ export class InsertComponent implements OnInit {
     });
 
     this.expenseForm = this.formBuilder.group({
+      clientEmail: [this.clientEmail, Validators.required], 
       created: ['', Validators.required],
       type: ['', Validators.required],
       amount: ['', [Validators.required, Validators.min(0)]],
@@ -64,6 +65,5 @@ export class InsertComponent implements OnInit {
     }
 
     this.expenseForm.reset()
-    
   }
 }

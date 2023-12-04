@@ -1,19 +1,17 @@
 <div class="container">
   <div class="card">
-    <h2>Insert your credential:</h2>
+    <h2>Inserisci le tue credenziali:</h2>
 
     <label for="email">Username</label>
-    <input type="text" placeholder="Enter your email" [(ngModel)]="email">
+    <input type="text" placeholder="Enter your email" [(ngModel)]="email" (keyup.enter)="login()">
 
     <label for="password">Password</label>
-    <input type="password" [(ngModel)]="password" placeholder="Enter your password">
+    <input type="password" [(ngModel)]="password" placeholder="Enter your password" (keyup.enter)="login()">
 
     <div class="button-container">
       <button color="primary" mat-raised-button mat-dialog-close cdkFocusInitial class="login"
         (click)="login()">Login</button>
       <button mat-raised-button mat-dialog-close class="cancel" color="warn" (click)="closeDialog()">Cancel</button>
     </div>
-
-
   </div>
 </div>

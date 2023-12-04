@@ -1,7 +1,7 @@
 <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" class="form-container">
     <div class="input-container">
     <mat-form-field appearance="fill">
-      <mat-label>Date</mat-label>
+      <mat-label>Data</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="created" />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -10,23 +10,23 @@
 
   <div class="input-container">
     <mat-form-field appearance="fill">
-      <mat-label>Type</mat-label>
+      <mat-label>Tipo</mat-label>
       <input matInput type="text" formControlName="type" />
     </mat-form-field>
   </div>
 
   <div class="input-container">
     <mat-form-field appearance="fill">
-      <mat-label>Amount</mat-label>
+      <mat-label>Costo</mat-label>
       <input matInput type="number" formControlName="amount" />
     </mat-form-field>
   </div>
 
   <div class="input-container">
-    <mat-checkbox formControlName="receipt">Has Receipt</mat-checkbox>
+    <mat-checkbox formControlName="receipt">Ricevuta</mat-checkbox>
   </div>
 
   <button mat-raised-button color="accent" type="submit" [disabled]="!expenseForm.valid">
-    Add Expense
+    Aggiungi Spesa
   </button>
 </form>

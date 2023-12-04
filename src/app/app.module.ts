@@ -17,6 +17,7 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
 import { ExpenseChartComponent } from './components/expense-chart/expense-chart.component';
 import { NgChartsModule } from 'ng2-charts';
 import { WatchComponent } from './components/watch/watch.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { WatchComponent } from './components/watch/watch.component';
     LoginDialogComponent,
     ExpenseChartComponent,
     WatchComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

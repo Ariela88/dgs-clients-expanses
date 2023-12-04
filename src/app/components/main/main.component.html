@@ -4,13 +4,13 @@
       <h2> Ricerca Cliente: </h2>
     </div>
     <div class="input-search-container">
-      <input class="input-search" type="text" [(ngModel)]="searchQuery" placeholder="Inserisci il nome">
+      <input class="input-search" type="text" [(ngModel)]="searchQuery" placeholder="Inserisci il nome" (keyup.enter)="searchClients()">
       <small *ngIf="noResultsFound">
         Nessun risultato trovato per la tua ricerca.
       </small>
       <div class="button-container">
         <button mat-raised-button color="primary" (click)="searchClients()">Cerca</button>
-        <button mat-raised-button (click)="clearSearchResults()">Reset Risultati</button>
+        <button mat-raised-button (click)="clearSearchResults()" >Reset</button>
       </div>
     </div>
   </div>
