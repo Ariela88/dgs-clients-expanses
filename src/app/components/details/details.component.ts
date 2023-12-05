@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { Client, Report, calculateAdminReimbursement } from 'src/app/model/client';
 import { DatasharingService } from 'src/app/services/datasharing.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-details',
@@ -16,9 +17,10 @@ export class DetailsComponent implements OnInit {
   expenses: Report[] = [];
   totalExpenses: number = 0;
   graphicVisible = false;
-  displayedColumns: string[] = ['type', 'amount', 'created', 'receipt'];
+  displayedColumns: string[] = ['remove','type', 'amount', 'created', 'receipt'];
   displayedAdminColumns: string[] = ['type', 'amount', 'created', 'receipt', 'approval', 'reimbursement'];
   adminEmail?: string;
+  @ViewChild(MatTable) table?: MatTable<Client>;
   
 
   constructor(private route: ActivatedRoute, private dataService: DataService, private dataSharingService: DatasharingService, private authService:AuthService) {}
@@ -42,8 +44,17 @@ export class DetailsComponent implements OnInit {
     });
   }
 
+  removeExpense(expense: Report) {
+    const index = this.client?.expenses.indexOf(expense);
   
+    if (index !== undefined && index !== -1) {
+      this.client?.expenses.splice(index, 1);
+      this.calculateTotalExpenses(); 
+      this.table?.renderRows(); 
+    }
+  }
 
+ 
   loadClientDetails() {
     if (this.clientEmail) {
       this.dataService.getClientByEmail(this.clientEmail).subscribe(
