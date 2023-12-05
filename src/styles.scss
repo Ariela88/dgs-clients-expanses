@@ -10,8 +10,22 @@ mat-toolbar{
 }
 
 app-footer{
-  position: relative;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  display: block;
+  height: 10%;
+}
+
+
+
+app-client{
+  width: 100%;
+  top: 10%;
+  bottom: 10%;
+  right: 0;
+  left: 0;
+  position: fixed;
+  overflow-y: scroll;
 }
