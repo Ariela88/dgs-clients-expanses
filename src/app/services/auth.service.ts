@@ -9,11 +9,14 @@ import { DatasharingService } from './datasharing.service';
 export class AuthService {
   private readonly clientKey = 'clients';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
-  private loggedInUserEmailSubject = new BehaviorSubject<string | undefined>(undefined);
-  loggedInUserEmail$: Observable<string | undefined> = this.loggedInUserEmailSubject.asObservable();
-
-   private isLoggedIn: boolean = false;
+  isAuthenticated$: Observable<boolean> =
+    this.isAuthenticatedSubject.asObservable();
+  private loggedInUserEmailSubject = new BehaviorSubject<string | undefined>(
+    undefined
+  );
+  loggedInUserEmail$: Observable<string | undefined> =
+    this.loggedInUserEmailSubject.asObservable();
+  private isLoggedIn: boolean = false;
   private isAdminUser: boolean = false;
 
   constructor(private dataShar: DatasharingService) {}
@@ -27,8 +30,6 @@ export class AuthService {
     localStorage.setItem(this.clientKey, JSON.stringify(clients));
   }
 
-
-
   authenticate(email: string, password: string): boolean {
     const clients = this.getClients();
     const client = clients.find((c: Client) => c.email === email);
@@ -36,13 +37,13 @@ export class AuthService {
     if (client && client.password === password) {
       this.isAuthenticatedSubject.next(true);
       this.dataShar.notifyAuthenticated(client);
-      
+
       if (email === 'admin@gmail.com') {
         this.loggedInUserEmailSubject.next('admin');
       } else {
         this.loggedInUserEmailSubject.next(email);
       }
-      
+
       return true;
     } else {
       return false;
@@ -50,7 +51,7 @@ export class AuthService {
   }
   logout(): void {
     this.isAuthenticatedSubject.next(false);
-    this.loggedInUserEmailSubject.next(undefined); 
+    this.loggedInUserEmailSubject.next(undefined);
   }
 
   getUserRole(): string {
@@ -59,7 +60,7 @@ export class AuthService {
 
     if (loggedInUser) {
       return loggedInUser.role;
-    }  
+    }
     return 'user';
   }
 
@@ -71,7 +72,6 @@ export class AuthService {
     this.isAdminUser = true;
   }
 
- 
   isUserLoggedIn(): boolean {
     return this.isLoggedIn;
   }
@@ -79,5 +79,4 @@ export class AuthService {
   isAdmin(): boolean {
     return this.isAdminUser;
   }
-  
 }

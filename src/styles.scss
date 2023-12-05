@@ -1,16 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Yanone+Kaffeesatz:wght@200;400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Agdasima&family=Poppins&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
-        background-color: rgb(87, 175, 230);
-      }
-mat-toolbar{
-    height: 80px !important;
-    z-index: 999;
+html,
+body {
+  height: 100%;
 }
 
-app-footer{
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: rgb(87, 175, 230);
+}
+
+mat-toolbar {
+  height: 80px !important;
+  z-index: 999;
+}
+
+app-footer {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -21,7 +28,7 @@ app-footer{
 
 
 
-app-client{
+app-client {
   width: 100%;
   top: 10%;
   bottom: 10%;
@@ -30,7 +37,8 @@ app-client{
   position: fixed;
   overflow-y: scroll;
 }
-app-insert-client{
+
+app-insert-client {
   width: 100%;
   top: 10%;
   bottom: 10%;
@@ -39,7 +47,8 @@ app-insert-client{
   position: fixed;
   overflow-y: scroll;
 }
-app-main{
+
+app-main {
   width: 100%;
   top: 10%;
   bottom: 10%;

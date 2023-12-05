@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Router,
+} from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from '../components/login-dialog/login-dialog.component';
 
@@ -8,9 +12,15 @@ import { LoginDialogComponent } from '../components/login-dialog/login-dialog.co
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private authService: AuthService, private dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
-  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  async canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean> {
     const isAuthenticated = await this.showLoginDialog();
     if (isAuthenticated) {
       return true;
@@ -23,8 +33,8 @@ export class AuthGuard implements CanActivate {
   private async showLoginDialog(): Promise<boolean> {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       width: '400px',
-     
-      disableClose: true, 
+
+      disableClose: true,
     });
 
     return dialogRef.afterClosed().toPromise();
