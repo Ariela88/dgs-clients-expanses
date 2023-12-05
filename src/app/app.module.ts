@@ -18,7 +18,6 @@ import { ExpenseChartComponent } from './components/expense-chart/expense-chart.
 import { NgChartsModule } from 'ng2-charts';
 import { WatchComponent } from './components/watch/watch.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { AdminComponent } from './components/admin/admin.component';
 import { InsertClientComponent } from './components/insert-client/insert-client.component';
 
 
@@ -33,7 +32,6 @@ import { InsertClientComponent } from './components/insert-client/insert-client.
     ExpenseChartComponent,
     WatchComponent,
     FooterComponent,
-    AdminComponent,
     InsertClientComponent,
   
   ],

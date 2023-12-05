@@ -5,7 +5,7 @@ import { InsertComponent } from './components/insert/insert.component';
 import { ClientComponent } from './components/client/client.component';
 import { AuthGuard } from './guard/auth.guard';
 import { InsertClientComponent } from './components/insert-client/insert-client.component';
-import { AdminGuard } from './guard/admin.guard';
+
 
 
 const routes: Routes = [
