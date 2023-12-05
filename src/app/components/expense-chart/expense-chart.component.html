@@ -1,6 +1,7 @@
+<canvas id="myChart" width="600" height="400"></canvas>
 
-<div>
-    <canvas id="myChart" width="600" height="400"></canvas>
-    <div id="tooltip"></div>
+<div *ngFor="let category of getDistinctCategories()">
+  <div *ngIf="category === selectedCategory || selectedCategory === 'All'">
+    <canvas id="{{ 'myChart-' + category }}"></canvas>
   </div>
-  
+</div>

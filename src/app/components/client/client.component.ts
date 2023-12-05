@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from 'src/app/model/client';
+import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { DatasharingService } from 'src/app/services/datasharing.service';
 
@@ -13,11 +14,13 @@ export class ClientComponent implements OnInit {
   clientEmail?: string;
   client?: Client;
   showInsert = false;
+  adminEmail?: string;
 
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
-    private dataSharingService: DatasharingService
+    private dataSharingService: DatasharingService,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +33,14 @@ export class ClientComponent implements OnInit {
       if (client && this.client && this.client.email === client.email) {
         this.client = client;
         console.log('Dettagli del cliente aggiornati:', this.client);
+      }
+    });
+
+    this.authService.loggedInUserEmail$.subscribe((email) => {
+      if (email === 'admin') {
+        this.adminEmail = email
+      } else {
+        this.adminEmail = undefined
       }
     });
   }

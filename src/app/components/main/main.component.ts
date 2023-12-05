@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Client } from 'src/app/model/client';
+import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 
 
@@ -15,12 +16,20 @@ export class MainComponent implements OnInit {
   searchQuery: string = '';
   searchResults: Client[] = [];
   noResultsFound: boolean = false;
+  adminEmail?: string;
 
-  constructor(private dataService: DataService, private router: Router) {}
+  constructor(private dataService: DataService, private router: Router,private authService:AuthService) {}
 
   ngOnInit(): void {
     this.dataService.getClients().subscribe((clients: any) => {
       this.clients = clients;
+    });
+    this.authService.loggedInUserEmail$.subscribe((email) => {
+      if (email === 'admin') {
+        this.adminEmail = email
+      } else {
+        this.adminEmail = undefined
+      }
     });
   }
 

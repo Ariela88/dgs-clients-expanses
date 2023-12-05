@@ -52,13 +52,9 @@
 
 
 <div class="admin-container"  *ngIf="adminEmail"> 
-
-
-<div class="show-graphic-button"> 
-  <button mat-raised-button color="primary" (click)="showGraphic()">{{ !graphicVisible ? 'Mostra Andamento Mensile' : 'Nascondi Grafico'}}</button></div>
-
 <div *ngIf="client" class="details-container">  
   <div class="table-details"> 
+    
     <table mat-table [dataSource]="client.expenses" class="mat-elevation-z8">   
 
       <ng-container matColumnDef="type">
@@ -115,10 +111,6 @@
     </table>
     <h4>Totale Spese : {{ totalExpenses | currency:'EUR':'symbol':'1.2-2' }}</h4>
     
-  </div>
-
-  <div class="graphic-details">    
-    <app-expense-chart [client]="client" *ngIf="graphicVisible" [updateChartTrigger]="graphicVisible"></app-expense-chart>
   </div>
 </div>
 

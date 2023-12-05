@@ -7,7 +7,7 @@ export interface Client {
 }
 
 export interface Report {
-  created: Date;
+  created: Date | string; 
   type: string;
   amount?: number;
   receipt: boolean;
@@ -24,3 +24,4 @@ export function calculateAdminReimbursement(expense: Report): number {
     return expense.amount || 0;
   }
 }
+

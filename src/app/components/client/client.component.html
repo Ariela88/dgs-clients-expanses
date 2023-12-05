@@ -1,5 +1,5 @@
 <div class="client-container">
-  <h1> Ciao {{client?.name}}!</h1>
+  <h1> Ciao {{adminEmail? 'Admin': client?.name}}!</h1>
   <app-details></app-details>
 </div>
 <div class="show-insert">

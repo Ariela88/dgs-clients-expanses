@@ -1,0 +1,67 @@
+
+<div class="form-container"  *ngIf="adminEmail">
+<form [formGroup]="newClientForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name" />
+      <div *ngIf="newClientForm.get('name')?.hasError('required') && newClientForm.get('name')?.touched">
+        Name is required.
+      </div>
+    </div>
+  
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" />
+      <div
+        *ngIf="newClientForm.get('email')?.hasError('required') && newClientForm.get('email')?.touched"
+      >
+        Email is required.
+      </div>
+      <div
+        *ngIf="newClientForm.get('email')?.hasError('email') && newClientForm.get('email')?.touched"
+      >
+        Invalid email format.
+      </div>
+    </div>
+  
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password" />
+      <div
+        *ngIf="newClientForm.get('password')?.hasError('required') && newClientForm.get('password')?.touched"
+      >
+        Password is required.
+      </div>
+    </div>
+  
+    <div>
+      <label for="created">Created:</label>
+      <input type="date" id="created" formControlName="created" />
+      <div
+        *ngIf="newClientForm.get('created')?.hasError('required') && newClientForm.get('created')?.touched"
+      >
+        Created date is required.
+      </div>
+    </div>
+  
+    <div>
+      <label for="role">Role:</label>
+      <select id="role" formControlName="role">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+      </select>
+      <div
+        *ngIf="newClientForm.get('role')?.hasError('required') && newClientForm.get('role')?.touched"
+      >
+        Role is required.
+      </div>
+    </div>
+    <div class="button-container"> 
+  
+    <button type="submit" [disabled]="!newClientForm.valid">Submit</button>
+</div>
+  </form>
+</div>
+  
+
+  <h1 *ngIf="!adminEmail"> Non hai i permessi per Accedere a questa pagina </h1>

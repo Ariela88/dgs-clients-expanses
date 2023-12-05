@@ -13,6 +13,9 @@ export class AuthService {
   private loggedInUserEmailSubject = new BehaviorSubject<string | undefined>(undefined);
   loggedInUserEmail$: Observable<string | undefined> = this.loggedInUserEmailSubject.asObservable();
 
+   private isLoggedIn: boolean = false;
+  private isAdminUser: boolean = false;
+
   constructor(private dataShar: DatasharingService) {}
 
   getClients() {
@@ -60,5 +63,21 @@ export class AuthService {
     return 'user';
   }
 
+  login() {
+    this.isLoggedIn = true;
+  }
+
+  setAdminRole() {
+    this.isAdminUser = true;
+  }
+
+ 
+  isUserLoggedIn(): boolean {
+    return this.isLoggedIn;
+  }
+
+  isAdmin(): boolean {
+    return this.isAdminUser;
+  }
   
 }
