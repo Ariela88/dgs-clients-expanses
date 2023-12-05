@@ -21,6 +21,7 @@ export class LoginDialogComponent {
 
     if (isAuthenticated) {
       this.dialogRef.close(true);
+      console.log(isAuthenticated)
     } else {
      alert('Le credenziali sono errrate')
     }

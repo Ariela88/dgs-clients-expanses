@@ -18,6 +18,8 @@ import { ExpenseChartComponent } from './components/expense-chart/expense-chart.
 import { NgChartsModule } from 'ng2-charts';
 import { WatchComponent } from './components/watch/watch.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AdminComponent } from './components/admin/admin.component';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ExpenseChartComponent,
     WatchComponent,
     FooterComponent,
+    AdminComponent,
+  
   ],
   imports: [
     BrowserModule,

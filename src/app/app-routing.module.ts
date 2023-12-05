@@ -5,6 +5,7 @@ import { InsertComponent } from './components/insert/insert.component';
 import { ClientComponent } from './components/client/client.component';
 import { AuthGuard } from './guard/auth.guard';
 
+
 const routes: Routes = [
   { path: 'home', component: MainComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
     component: ClientComponent,
     canActivate: [AuthGuard],
   },
+
 ];
 
 @NgModule({

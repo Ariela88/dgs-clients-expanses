@@ -77,6 +77,14 @@ export class DataService {
             { created: '2023-02-17', type: 'Parking', amount: 10, receipt: false },
           ],
         },
+        {
+          name: 'Admin',
+          email: 'admin@gmail.com',
+          password: 'admin', 
+          role: 'admin', 
+          expenses: [          
+          ],
+        },
        
       ],
     };
