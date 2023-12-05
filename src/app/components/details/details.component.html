@@ -1,10 +1,15 @@
 <div class="user" *ngIf="!adminEmail">
-  <div class="show-graphic-button"> <button mat-raised-button color="primary" (click)="showGraphic()">{{ !graphicVisible
-      ? 'Mostra Andamento Mensile' : 'Nascondi Grafico'}}</button></div>
+
+  <div class="show-graphic-button">
+    <button mat-raised-button color="primary" (click)="showGraphic()">
+      {{ !graphicVisible
+      ? 'Mostra Andamento Mensile' : 'Nascondi Grafico'}}
+    </button>
+  </div>
 
   <div *ngIf="client" class="details-container">
-    <div class="table-details">
 
+    <div class="table-details">
       <table mat-table [dataSource]="client.expenses" class="mat-elevation-z8">
         <ng-container matColumnDef="remove">
           <th mat-header-cell *matHeaderCellDef></th>
@@ -19,18 +24,16 @@
           <th mat-header-cell *matHeaderCellDef>Tipo</th>
           <td mat-cell *matCellDef="let expense">{{ expense.type }}</td>
         </ng-container>
-        
+
         <ng-container matColumnDef="amount">
           <th mat-header-cell *matHeaderCellDef>Costo</th>
           <td mat-cell *matCellDef="let expense">{{ expense.amount }}</td>
         </ng-container>
 
-
         <ng-container matColumnDef="created">
           <th mat-header-cell *matHeaderCellDef>Data</th>
           <td mat-cell *matCellDef="let expense">{{ expense.created | date:'short' }}</td>
         </ng-container>
-
 
         <ng-container matColumnDef="receipt">
           <th mat-header-cell *matHeaderCellDef>Ricevuta</th>
@@ -41,6 +44,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
       </table>
+
       <h4>Totale Spese : {{ totalExpenses | currency:'EUR':'symbol':'1.2-2' }}</h4>
 
     </div>

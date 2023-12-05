@@ -1,9 +1,16 @@
 <div class="client-container">
-  <h1> Ciao {{adminEmail? 'Admin': client?.name}}!</h1>
+  <h1>
+    Ciao {{adminEmail? 'Admin': client?.name}}!
+  </h1>
   <app-details></app-details>
 </div>
+
+
 <div class="show-insert">
-  <button mat-raised-button color="primary" (click)="insertExpenses()">{{!showInsert? 'Inserisci nuova spesa' :
-    'Nascondi'}}</button>
+  <button mat-raised-button color="primary" (click)="insertExpenses()">
+    {{!showInsert? 'Inserisci nuova spesa' :
+    'Nascondi'}}
+  </button>
 </div>
+
 <app-insert *ngIf="showInsert"></app-insert>
