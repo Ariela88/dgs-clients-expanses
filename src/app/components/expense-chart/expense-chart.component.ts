@@ -58,7 +58,7 @@ export class ExpenseChartComponent implements OnInit, OnChanges {
         );
 
         return {
-          label: `${this.client!.name} - ${category}`,
+          label: `${category}`,
           data: values,
           borderWidth: 1,
           hidden: category !== this.selectedCategory && this.selectedCategory !== 'All',
