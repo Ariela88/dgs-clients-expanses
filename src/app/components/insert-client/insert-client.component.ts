@@ -48,8 +48,7 @@ export class InsertClientComponent {
   onSubmit() {
     if (this.newClientForm?.valid) {
       const newClient: Client = this.newClientForm.value;
-      this.dataService.addClient(newClient);
-     
+      this.dataService.addClient(newClient);     
       this.newClientForm.reset();
     }
   }

@@ -22,7 +22,6 @@ export class DetailsComponent implements OnInit {
   adminEmail?: string;
   @ViewChild(MatTable) table?: MatTable<Client>;
   
-
   constructor(private route: ActivatedRoute, private dataService: DataService, private dataSharingService: DatasharingService, private authService:AuthService) {}
 
   ngOnInit(): void {

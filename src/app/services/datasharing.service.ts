@@ -10,6 +10,7 @@ export class DatasharingService {
   private authenticatedSubject = new BehaviorSubject<Client | null>(null);
   private triggerExpenseChartUpdateSource = new Subject<void>();
   private expensesSubject = new BehaviorSubject<Report[]>([]);
+  
   expenses$: Observable<Report[]> = this.expensesSubject.asObservable();
   authenticated$: Observable<Client | null> =
     this.authenticatedSubject.asObservable();

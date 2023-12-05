@@ -32,7 +32,6 @@ export class ExpenseChartComponent implements OnInit, OnChanges {
       this.client.expenses.forEach((expense: Report) => {
         const createdDate: Date = new Date(expense.created);
         const dayMonthYear: string = createdDate.toISOString().split('T')[0];
-
         categoriesData[expense.type] = categoriesData[expense.type] || {};
         categoriesData[expense.type][dayMonthYear] = (categoriesData[expense.type][dayMonthYear] || 0) + expense.amount!;
       });

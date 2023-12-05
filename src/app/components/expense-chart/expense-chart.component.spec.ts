@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ExpenseChartComponent } from './expense-chart.component';
 
 describe('ExpenseChartComponent', () => {
@@ -19,3 +18,4 @@ describe('ExpenseChartComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
