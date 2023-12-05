@@ -38,7 +38,7 @@ export class AuthService {
       this.isAuthenticatedSubject.next(true);
       this.dataShar.notifyAuthenticated(client);
 
-      if (email === 'admin@gmail.com') {
+      if (client.role === 'admin') {
         this.loggedInUserEmailSubject.next('admin');
       } else {
         this.loggedInUserEmailSubject.next(email);
@@ -54,29 +54,12 @@ export class AuthService {
     this.loggedInUserEmailSubject.next(undefined);
   }
 
-  getUserRole(): string {
-    const clients = this.getClients();
-    const loggedInUser = clients[0];
+  
+ 
 
-    if (loggedInUser) {
-      return loggedInUser.role;
-    }
-    return 'user';
-  }
+  
 
-  login() {
-    this.isLoggedIn = true;
-  }
+ 
 
-  setAdminRole() {
-    this.isAdminUser = true;
-  }
-
-  isUserLoggedIn(): boolean {
-    return this.isLoggedIn;
-  }
-
-  isAdmin(): boolean {
-    return this.isAdminUser;
-  }
+  
 }
