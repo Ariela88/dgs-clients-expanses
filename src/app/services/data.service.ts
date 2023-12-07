@@ -169,11 +169,6 @@ export class DataService {
     return of(clients.find((client: Client) => client.email === email));
   }
 
-  setClient() {
-    const clients = this.auth.getClients();
-    this.auth.setClients(clients);
-  }
-
   updateClient(updatedClient: Client) {
     const clients = this.auth.getClients();
     const index = clients.findIndex(

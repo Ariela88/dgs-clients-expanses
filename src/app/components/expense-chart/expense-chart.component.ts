@@ -35,37 +35,51 @@ export class ExpenseChartComponent implements OnInit, OnChanges {
   generateChart() {
     if (this.client) {
       const categoriesData: Record<string, Record<string, number>> = {};
+      const existingCategories: Set<string> = new Set();
+  
       this.client.expenses.forEach((expense: Report) => {
         const createdDate: Date = new Date(expense.created);
         const dayMonthYear: string = createdDate.toISOString().split('T')[0];
+        existingCategories.add(expense.type);
+  
         categoriesData[expense.type] = categoriesData[expense.type] || {};
         categoriesData[expense.type][dayMonthYear] =
           (categoriesData[expense.type][dayMonthYear] || 0) + expense.amount!;
       });
-
+  
       const labels: string[] = Object.keys(categoriesData)
         .flatMap((category) => Object.keys(categoriesData[category]))
         .sort();
-
+  
       const totalExpenses = labels.map((date) =>
-        this.client!.expenses.filter(
-          (expense) =>
-            expense.type === this.selectedCategory ||
-            this.selectedCategory === 'All'
-        )
+        this.client!.expenses
+          .filter(
+            (expense) =>
+              expense.type === this.selectedCategory ||
+              this.selectedCategory === 'All'
+          )
           .filter(
             (expense) =>
               new Date(expense.created).toISOString().split('T')[0] === date
           )
           .reduce((total, expense) => total + expense.amount!, 0)
       );
-
+  
+      // Check for new expense types and add them to categoriesData
+      const newExpenseTypes = this.getDistinctCategories().filter(
+        (category) => !existingCategories.has(category)
+      );
+  
+      newExpenseTypes.forEach((newType) => {
+        categoriesData[newType] = categoriesData[newType] || {};
+      });
+  
       const datasets: ChartDataset[] = Object.keys(categoriesData).map(
         (category) => {
           const values = labels.map(
             (label) => categoriesData[category][label] || 0
           );
-
+  
           return {
             label: `${category}`,
             data: values,
@@ -76,7 +90,7 @@ export class ExpenseChartComponent implements OnInit, OnChanges {
           };
         }
       );
-
+  
       datasets.push({
         label: 'Total Expenses',
         data: totalExpenses,
@@ -84,7 +98,7 @@ export class ExpenseChartComponent implements OnInit, OnChanges {
         borderColor: 'black',
         hidden: this.selectedCategory !== 'All',
       });
-
+  
       const ctx: any = document.getElementById('myChart');
       const chart: any = new Chart(ctx, {
         type: 'line',
@@ -104,11 +118,12 @@ export class ExpenseChartComponent implements OnInit, OnChanges {
           },
         },
       });
-
+  
       chart.canvas.parentNode.style.height = '100%';
     }
   }
-
+    
+  
   onCategoryChange() {
     this.generateChart();
   }
