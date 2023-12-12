@@ -45,6 +45,7 @@ export class AuthService {
         this.loggedInUserEmailSubject.next('admin');
       } else {
         this.loggedInUserEmailSubject.next(email);
+
       }
       return true;
     } else {
