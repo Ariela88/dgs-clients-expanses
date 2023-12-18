@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Client } from '../model/client';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { DatasharingService } from './datasharing.service';
 
 @Injectable({
@@ -183,4 +183,7 @@ export class DataService {
       console.error("Cliente non trovato per l'aggiornamento.");
     }
   }
+
+
+  
 }

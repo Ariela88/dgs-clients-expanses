@@ -9,12 +9,12 @@ import { DatasharingService } from './datasharing.service';
 export class AuthService {
   
   private readonly clientKey = 'clients';
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  public isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
   isAuthenticated$: Observable<boolean> =
     this.isAuthenticatedSubject.asObservable();
 
-  private loggedInUserEmailSubject = new BehaviorSubject<string | undefined>(
+  public loggedInUserEmailSubject = new BehaviorSubject<string | undefined>(
     undefined
   );
 
@@ -57,13 +57,6 @@ export class AuthService {
     this.isAuthenticatedSubject.next(false);
     this.loggedInUserEmailSubject.next(undefined);
   }
-
-  
- 
-
-  
-
- 
 
   
 }
